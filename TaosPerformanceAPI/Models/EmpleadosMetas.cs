@@ -11,8 +11,8 @@ namespace TaosPerformanceAPI.Models
         [Column("id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Column("employeeId"), Required]
-        public int IdEmpleado { get; set; }
+        [Column("employeeId"), Required, StringLength(10)]
+        public string IdEmpleado { get; set; }
 
         [Column("periodId"), Required]
         public int IdPeriodo { get; set; }
@@ -34,5 +34,8 @@ namespace TaosPerformanceAPI.Models
 
         [Column("progressMade")]
         public Double ProgresoCompletado { get; set; }
+
+        [InverseProperty("EmpleadosMetas"), ForeignKey("IdEmpleado")]
+        public virtual Empleados Empleados { get; set; }
     }
 }

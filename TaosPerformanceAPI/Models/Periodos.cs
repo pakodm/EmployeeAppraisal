@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TaosPerformanceAPI.Models
 {
-    [Table("evaluation_period")]
+    [Table("period_details")]
     public class Periodos
     {
         [Column("id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]

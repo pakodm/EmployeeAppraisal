@@ -9,6 +9,11 @@ namespace TaosPerformanceAPI.Models
     [Table("employees")]
     public class Empleados
     {
+        public Empleados()
+        {
+            EmpleadosMetas = new HashSet<EmpleadosMetas>();
+        }
+
         [Column("id"), Key, StringLength(10), Required]
         public string Id { get; set; }
 
@@ -68,6 +73,9 @@ namespace TaosPerformanceAPI.Models
 
         [Column("enabled"), Required]
         public bool Activo { get; set; }
+
+        [InverseProperty("Empleados")]
+        public virtual ICollection<EmpleadosMetas> EmpleadosMetas { get; set; }
 
         [InverseProperty("Empleados"), ForeignKey("EmpresaUsuario")]
         public virtual Empresas Empresas { get; set; }
