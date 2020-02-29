@@ -42,7 +42,7 @@ namespace TaosPerformanceAPI.DAL
                 return;
             }
 
-            IConfiguration confg = new ConfigurationBuilder().AddJsonFile("appsetting.json").Build();
+            IConfiguration confg = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             String cnxString = confg.GetValue<String>("dbInUse");
             if (!String.IsNullOrEmpty(cnxString))
             {
