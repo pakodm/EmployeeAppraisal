@@ -59,6 +59,7 @@ namespace TaosPerformanceAPI.DAL
             });
             modelBuilder.Entity<Competencias>(entity => {
                 entity.HasKey(e => new { e.Id, e.IdHabilidad }).HasName("PK_skills");
+                // entity.HasMany(p => p.Parametros).WithOne(c => c.Competencias).HasForeignKey(c => c.IdCompetencia);
             });
             modelBuilder.Entity<DatosCatalogo>(entity => {
                 entity.HasKey(e => new { e.Id, e.IdCatalogo, e.IdEmpresa }).HasName("PK_catalogs_data");
@@ -69,6 +70,7 @@ namespace TaosPerformanceAPI.DAL
             });
             modelBuilder.Entity<EmpleadosMetas>(entity => {
                 entity.HasKey(e => new { e.Id, e.IdPeriodo, e.IdEmpleado }).HasName("PK_employees");
+                entity.HasOne(m => m.Empleados).WithMany(e => e.EmpleadosMetas).HasForeignKey(m => m.IdEmpleado).HasPrincipalKey(e => e.Id);
                 
             });
             modelBuilder.Entity<EmpleadosMetasRetro>();
@@ -82,6 +84,7 @@ namespace TaosPerformanceAPI.DAL
             modelBuilder.Entity<Habilidades>();
             modelBuilder.Entity<Parametros>(entity => {
                 entity.HasKey(e => new { e.Id, e.IdCompetencia }).HasName("PK_parameters");
+                entity.HasOne(p => p.Competencias).WithMany(c => c.Parametros).HasForeignKey(p => p.IdCompetencia).HasPrincipalKey(c => c.Id);
             });
             modelBuilder.Entity<Periodos>(entity => {
                 entity.HasKey(e => new { e.Id, e.IdEmpresa }).HasName("PK_period_details");
@@ -98,13 +101,16 @@ namespace TaosPerformanceAPI.DAL
             modelBuilder.Entity<PeriodoHabilidades>();
             modelBuilder.Entity<PeriodoParametros>(entity => {
                 entity.HasKey(e => new { e.Id, e.IdCompetencia }).HasName("PK_period_parameters");
+                entity.HasOne(p => p.PeriodoCompetencias).WithMany(c => c.PeriodoParametros).HasForeignKey(p => p.IdCompetencia).HasPrincipalKey(c => c.Id);
             });
             modelBuilder.Entity<Plantillas>(entity => {
                 entity.Property(a => a.EsBase).HasConversion<int>();
                 entity.Property(a => a.Habilitada).HasConversion<int>();
                 entity.Property(a => a.IdEmpresa).HasDefaultValue(0);
             });
-            modelBuilder.Entity<Relaciones>();
+            modelBuilder.Entity<Relaciones>(entity => {
+                entity.HasKey(e => new { e.IdEmpresa, e.IdLider, e.IdEmpleado });
+            });
             modelBuilder.Entity<TipoMeta>(entity => {
                 entity.HasKey(e => new { e.Id, e.IdEmpresa }).HasName("PK_goal_type");
             });

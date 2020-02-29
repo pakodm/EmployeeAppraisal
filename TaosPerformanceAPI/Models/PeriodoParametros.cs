@@ -33,6 +33,6 @@ namespace TaosPerformanceAPI.Models
         public string Opciones { get; set; }
 
         [InverseProperty("PeriodoParametros"), ForeignKey("IdCompetencia")]
-        public virtual PeriodoCompetencias Competencias { get; set; }
+        public virtual PeriodoCompetencias PeriodoCompetencias { get; set; }
     }
 }

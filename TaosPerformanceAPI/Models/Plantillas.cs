@@ -28,7 +28,7 @@ namespace TaosPerformanceAPI.Models
         [Column("enabled"), Required]
         public bool Habilitada { get; set; }
 
-        [InverseProperty("Plantilas")]
+        [InverseProperty("Plantillas")]
         public virtual ICollection<Habilidades> Habilidades { get; set; }
     }
 }

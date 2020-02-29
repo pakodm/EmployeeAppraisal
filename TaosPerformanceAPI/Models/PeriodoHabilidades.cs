@@ -10,7 +10,7 @@ namespace TaosPerformanceAPI.Models
     {
         public PeriodoHabilidades()
         {
-            Competencias = new HashSet<PeriodoCompetencias>();
+            PeriodoCompetencias = new HashSet<PeriodoCompetencias>();
         }
 
         [Column("id"), Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -33,6 +33,6 @@ namespace TaosPerformanceAPI.Models
         public double PerfilEsperado { get; set; }
 
         [InverseProperty("PeriodoHabilidades")]
-        public virtual ICollection<PeriodoCompetencias> Competencias { get; set; }
+        public virtual ICollection<PeriodoCompetencias> PeriodoCompetencias { get; set; }
     }
 }
